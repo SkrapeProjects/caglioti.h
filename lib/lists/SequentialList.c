@@ -1,10 +1,10 @@
-#include "listaseq.h"
+#include "SequentialList.h"
 
-void Inizializza(ListaSequenziale* Lista) {
+void seqList_Initialize(ListaSequenziale* Lista) {
     Lista->Lunghezza = 0;
 }
 
-bool InserisciInCoda(ListaSequenziale* Lista, int NuovoElemento) {
+bool seqList_Add(ListaSequenziale* Lista, int NuovoElemento) {
     if (Lista->Lunghezza == MAX_LUNGHEZZA) {
         return false;
     }
@@ -13,7 +13,7 @@ bool InserisciInCoda(ListaSequenziale* Lista, int NuovoElemento) {
     return true;
 }
 
-bool InserisciAdIndice(ListaSequenziale* Lista, int NuovoElemento, int IndiceNuovoElemento) {
+bool seqList_InsertAtIndex(ListaSequenziale* Lista, int NuovoElemento, int IndiceNuovoElemento) {
     if (Lista->Lunghezza == MAX_LUNGHEZZA || IndiceNuovoElemento > Lista->Lunghezza) {
         return false;
     }
@@ -27,7 +27,7 @@ bool InserisciAdIndice(ListaSequenziale* Lista, int NuovoElemento, int IndiceNuo
     return false;
 }
 
-bool ShiftSequenza(ListaSequenziale* Lista, int Indice, int NumeroPosizioni) {
+bool seqList_ShiftSequence(ListaSequenziale* Lista, int Indice, int NumeroPosizioni) {
     int i;
 
     if (Lista->Lunghezza + NumeroPosizioni >= MAX_LUNGHEZZA || Indice < 0 || Indice >= Lista->Lunghezza) {
@@ -41,7 +41,7 @@ bool ShiftSequenza(ListaSequenziale* Lista, int Indice, int NumeroPosizioni) {
     return true;
 }
 
-int Elemento(ListaSequenziale* Lista, int i) {
+int seqList_Get(ListaSequenziale* Lista, int i) {
     if (i >= Lista->Lunghezza) {
         return 0;
     }

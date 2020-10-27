@@ -1,17 +1,19 @@
-#ifndef HEADER_LISTASEQ
-#define HEADER_LISTASEQ
+#ifndef SEQUENTIALLIST_H
+#define SEQUENTIALLIST_H
 
 #include "utils.h"
 
 #define MAX_LUNGHEZZA 100
 
+typedef int SeqListT;
+
 typedef struct {
-	int Sequenza[MAX_LUNGHEZZA];
+	SeqListT Sequenza[MAX_LUNGHEZZA];
 	int Lunghezza;
 } ListaSequenziale;
 
-void Inizializza(ListaSequenziale*);
-bool InserisciInCoda(ListaSequenziale*, int);
+void seqList_Initialize(ListaSequenziale*);
+bool seqList_Add(ListaSequenziale*, SeqListT);
 
 /**
  * Funzione per l'inserimento di un elemento ad un certo indice
@@ -21,7 +23,7 @@ bool InserisciInCoda(ListaSequenziale*, int);
  * 
  * @return true se l'inserimento è andato a buon fine, false altrimenti
 */
-bool InserisciAdIndice(ListaSequenziale*, int, int);
+bool seqList_InsertAtIndex(ListaSequenziale*, SeqListT, int);
 
 /**
  * Funzione per lo spostamento degli elementi in una sequenza a destra
@@ -32,8 +34,8 @@ bool InserisciAdIndice(ListaSequenziale*, int, int);
  * 
  * @return true se lo spostamento è andato a buon fine, false altrimenti
 */
-bool ShiftSequenza(ListaSequenziale*, int, int);
+bool seqList_ShiftSequence(ListaSequenziale*, int, int);
 
-int Elemento(ListaSequenziale*, int);
+SeqListT seqList_Get(ListaSequenziale*, int);
 
 #endif

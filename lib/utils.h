@@ -1,9 +1,9 @@
-#ifndef HEADER_UTILS
-#define HEADER_UTILS
+#ifndef UTILS_H
+#define UTILS_H
 
 typedef enum {
-    false,
-    true
+    false = 0,
+    true = 1
 } bool;
 
 #endif
