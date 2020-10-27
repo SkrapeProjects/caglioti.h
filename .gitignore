@@ -1,3 +1,2 @@
 
-*.exe
-test/main.c
+test/*
