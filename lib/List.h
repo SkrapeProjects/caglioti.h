@@ -1,7 +1,7 @@
 #ifndef LISTS_H
 #define LISTS_H
 
-#include <SequentialList.h>
-#include <LinkedList.h>
+#include "lists/SequentialList.h"
+#include "lists/LinkedList.h"
 
 #endif

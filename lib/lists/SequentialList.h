@@ -1,7 +1,7 @@
 #ifndef SEQUENTIALLIST_H
 #define SEQUENTIALLIST_H
 
-#include "utils.h"
+#include "../Utils.h"
 
 #define MAX_LUNGHEZZA 100
 

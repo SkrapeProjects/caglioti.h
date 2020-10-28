@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef char ListT;
+typedef int ListT;
 
 typedef struct __Node {
     ListT *dataPointer;
@@ -14,7 +14,7 @@ typedef struct __Node {
 } Node;
 
 typedef struct {
-    Node *currentNode;
+    Node *lastNode;
     int size;
 } LinkedList;
 
@@ -29,14 +29,22 @@ LinkedList* linkedList_New();
  * @param Lista la lista a cui aggiungere l'elemento
  * @param Dato il dato da inserire
 */
-void linkedList_Add(LinkedList *list, ListT data);
+void linkedList_Add(LinkedList*, ListT);
+
+/**
+ * Aggiunge un elemento a una lista dinamica alla posizione indicata dall'indice
+ * @param Lista la lista a cui aggiungere l'elemento
+ * @param Indice l'indice dove dell'elemento
+ * @param Dato il dato da inserire
+*/
+void linkedList_Insert(LinkedList*, int, ListT);
 
 /**
  * Rimuove un elemento da una lista dinamica
  * @param Lista la lista da cui rimuovere l'elemento
  * @param Indice l'indice dell'elemento nella lista
 */
-void linkedList_Remove(LinkedList *list, int index);
+void linkedList_Remove(LinkedList*, int);
 
 /**
  * Trova un elemento in una lista dinamica
@@ -45,7 +53,7 @@ void linkedList_Remove(LinkedList *list, int index);
  * 
  * @return il puntatore all'elemento
 */
-Node* linkedList_Find(LinkedList *list, int index);
+Node* linkedList_Find(LinkedList*, int);
 
 /**
  * Cerca il puntatore al dato in un elemento contenuto in una lista dinamica
@@ -54,7 +62,7 @@ Node* linkedList_Find(LinkedList *list, int index);
  * 
  * @return il puntatore al dato contenuto nell'elemento
 */
-ListT* linkedList_Get(LinkedList *list, int index);
+ListT* linkedList_Get(LinkedList*, int);
 
 /**
  * Ottiene il dato contenuto in un elemento di una lista dinamica
@@ -63,7 +71,7 @@ ListT* linkedList_Get(LinkedList *list, int index);
  * 
  * @return il dato al dato contenuto nell'elemento
 */
-ListT linkedList_GetValue(LinkedList *list, int index);
+ListT linkedList_GetValue(LinkedList*, int);
 
 /**
  * Ottiene il dato contenuto in un elemento di una lista dinamica
@@ -71,12 +79,12 @@ ListT linkedList_GetValue(LinkedList *list, int index);
  * @param Indice l'indice in cui inserire l'elemento nella lista
  * @param Dato il dato da inserire
 */
-void linkedList_SetValue(LinkedList *list, int index, ListT value);
+void linkedList_SetValue(LinkedList*, int, ListT);
 
 /**
  * Stampa i valori degli elementi di una lista dinamica
  * @param Lista la lista da stampare
 */
-void linkedList_Print(LinkedList *list);
+void linkedList_Print(LinkedList*);
 
 #endif
