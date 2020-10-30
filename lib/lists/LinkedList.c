@@ -11,21 +11,21 @@ Node* linkedList_FindRecursive(Node *node, int index)
         return linkedList_FindRecursive(node->prev, index);
 }
 
-void linkedList_PrintRecursive(Node *node, int maxIndex)
+void linkedList_LoadDataToNode(Node *node, int dataSize, void *data)
 {
-    printf("%d ", *node->dataPointer);
-    if (node->index < maxIndex)
-        linkedList_PrintRecursive(node->next, maxIndex);
+    int i;
+    for (i = 0; i < dataSize; i ++)
+        *((char *) node->dataPointer + i) = *((char *) data + i);
 }
 
 /* ---------------------------------------------- */
 
-void linkedList_Add(LinkedList *list, ListT data)
+void linkedList_Add(LinkedList *list, void *data)
 {
     Node *newNode = malloc(sizeof(Node));
     newNode->index = list->size ++;
-    newNode->dataPointer = malloc(sizeof(ListT));
-    *newNode->dataPointer = data;
+    newNode->dataPointer = malloc(list->dataSize);
+    linkedList_LoadDataToNode(newNode, list->dataSize, data);
     newNode->prev = list->lastNode;
     newNode->next = NULL;
     if (list->lastNode != NULL)
@@ -33,15 +33,15 @@ void linkedList_Add(LinkedList *list, ListT data)
     list->lastNode = newNode;
 }
 
-void linkedList_Insert(LinkedList *list, int index, ListT data)
+void linkedList_Insert(LinkedList *list, int index, void *data)
 {
     if (index > list->size - 1 || index < 0)
         return;
     Node *newNode = malloc(sizeof(Node));
     Node *currentNode = linkedList_Find(list, index);
     newNode->index = currentNode->index;
-    newNode->dataPointer = malloc(sizeof(ListT));
-    *newNode->dataPointer = data;
+    newNode->dataPointer = malloc(list->dataSize);
+    linkedList_LoadDataToNode(newNode, list->dataSize, data);
     newNode->prev = currentNode->prev;
     newNode->next = currentNode;
     currentNode->prev->next = newNode;
@@ -62,27 +62,19 @@ Node* linkedList_Find(LinkedList *list, int index)
     linkedList_FindRecursive(list->lastNode, index);
 }
 
-ListT* linkedList_Get(LinkedList *list, int index)
+void* linkedList_Get(LinkedList *list, int index)
 {
     if (index > list->size - 1 || index < 0)
         return NULL;
     return linkedList_Find(list, index)->dataPointer;
 }
 
-ListT linkedList_GetValue(LinkedList *list, int index)
-{
-    if (index > list->size - 1 || index < 0)
-        return 0;
-    return *linkedList_Find(list, index)->dataPointer;
-}
-
-void linkedList_SetValue(LinkedList *list, int index, ListT value)
+void linkedList_Set(LinkedList *list, int index, void *value)
 {
     if (index > list->size - 1 || index < 0)
         return;
     Node *node = linkedList_Find(list, index);
-    node->dataPointer = malloc(sizeof(ListT));
-    *node->dataPointer = value;
+    linkedList_LoadDataToNode(node, list->dataSize, value);
 }
 
 void linkedList_Remove(LinkedList *list, int index)
@@ -108,17 +100,11 @@ void linkedList_Remove(LinkedList *list, int index)
     free(originalNode);
 }
 
-LinkedList* linkedList_New()
+LinkedList* linkedList_New(int dataTypeSize)
 {
     LinkedList *linkedList = malloc(sizeof(LinkedList));
     linkedList->size = 0;
+    linkedList->dataSize = dataTypeSize;
     linkedList->lastNode = NULL;
     return linkedList;
-}
-
-void linkedList_Print(LinkedList *list)
-{
-    Node *start = linkedList_Find(list, 0);
-    linkedList_PrintRecursive(start, list->size - 1);
-    printf("\n");
 }

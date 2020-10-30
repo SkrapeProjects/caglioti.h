@@ -4,10 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef int ListT;
-
 typedef struct __Node {
-    ListT *dataPointer;
+    void *dataPointer;
     struct __Node *next;
     struct __Node *prev;
     int index;
@@ -15,6 +13,7 @@ typedef struct __Node {
 
 typedef struct {
     Node *lastNode;
+    int dataSize;
     int size;
 } LinkedList;
 
@@ -22,14 +21,14 @@ typedef struct {
  * Inizializza una nuova lista dinamica 
  * @return il puntatore alla lista
 */
-LinkedList* linkedList_New();
+LinkedList* linkedList_New(int);
 
 /**
  * Aggiunge un elemento a una lista dinamica
  * @param Lista la lista a cui aggiungere l'elemento
  * @param Dato il dato da inserire
 */
-void linkedList_Add(LinkedList*, ListT);
+void linkedList_Add(LinkedList*, void*);
 
 /**
  * Aggiunge un elemento a una lista dinamica alla posizione indicata dall'indice
@@ -37,7 +36,7 @@ void linkedList_Add(LinkedList*, ListT);
  * @param Indice l'indice dove dell'elemento
  * @param Dato il dato da inserire
 */
-void linkedList_Insert(LinkedList*, int, ListT);
+void linkedList_Insert(LinkedList*, int, void*);
 
 /**
  * Rimuove un elemento da una lista dinamica
@@ -62,16 +61,7 @@ Node* linkedList_Find(LinkedList*, int);
  * 
  * @return il puntatore al dato contenuto nell'elemento
 */
-ListT* linkedList_Get(LinkedList*, int);
-
-/**
- * Ottiene il dato contenuto in un elemento di una lista dinamica
- * @param Lista la lista in cui cercare l'elemento
- * @param Indice l'indice dell'elemento nella lista
- * 
- * @return il dato al dato contenuto nell'elemento
-*/
-ListT linkedList_GetValue(LinkedList*, int);
+void* linkedList_Get(LinkedList*, int);
 
 /**
  * Ottiene il dato contenuto in un elemento di una lista dinamica
@@ -79,12 +69,6 @@ ListT linkedList_GetValue(LinkedList*, int);
  * @param Indice l'indice in cui inserire l'elemento nella lista
  * @param Dato il dato da inserire
 */
-void linkedList_SetValue(LinkedList*, int, ListT);
-
-/**
- * Stampa i valori degli elementi di una lista dinamica
- * @param Lista la lista da stampare
-*/
-void linkedList_Print(LinkedList*);
+void linkedList_Set(LinkedList*, int, void *);
 
 #endif
