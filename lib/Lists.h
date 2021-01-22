@@ -2,6 +2,7 @@
 #define LISTS_H
 
 #include "lists/SequentialList.h"
-#include "lists/LinkedList.h"
+#include "lists/DLinkedList.h"
+#include "lists/SLinkedList.h"
 
 #endif

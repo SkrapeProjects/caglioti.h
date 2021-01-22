@@ -1,34 +1,31 @@
-#ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+#ifndef D_LINKED_LIST_H
+#define D_LINKED_LIST_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct __Node {
+typedef struct __DLinkedNode {
     void *dataPointer;
-    struct __Node *next;
-    struct __Node *prev;
+    struct __DLinkedNode *next;
+    struct __DLinkedNode *prev;
     int index;
-} Node;
+} DLinkedNode;
 
 typedef struct {
-    Node *lastNode;
+    DLinkedNode *lastNode;
     int dataSize;
     int size;
-} LinkedList;
+} DLinkedList;
 
 /**
  * Inizializza una nuova lista dinamica 
  * @return il puntatore alla lista
 */
-LinkedList* linkedList_New(int);
+DLinkedList* dLinkedList_New(int);
 
 /**
  * Aggiunge un elemento a una lista dinamica
  * @param Lista la lista a cui aggiungere l'elemento
  * @param Dato il dato da inserire
 */
-void linkedList_Add(LinkedList*, void*);
+void dLinkedList_Add(DLinkedList*, void*);
 
 /**
  * Aggiunge un elemento a una lista dinamica alla posizione indicata dall'indice
@@ -36,14 +33,14 @@ void linkedList_Add(LinkedList*, void*);
  * @param Indice l'indice dove dell'elemento
  * @param Dato il dato da inserire
 */
-void linkedList_Insert(LinkedList*, int, void*);
+void dLinkedList_Insert(DLinkedList*, int, void*);
 
 /**
  * Rimuove un elemento da una lista dinamica
  * @param Lista la lista da cui rimuovere l'elemento
  * @param Indice l'indice dell'elemento nella lista
 */
-void linkedList_Remove(LinkedList*, int);
+void dLinkedList_Remove(DLinkedList*, int);
 
 /**
  * Trova un elemento in una lista dinamica
@@ -52,7 +49,7 @@ void linkedList_Remove(LinkedList*, int);
  * 
  * @return il puntatore all'elemento
 */
-Node* linkedList_Find(LinkedList*, int);
+DLinkedNode* dLinkedList_Find(DLinkedList*, int);
 
 /**
  * Cerca il puntatore al dato in un elemento contenuto in una lista dinamica
@@ -61,7 +58,7 @@ Node* linkedList_Find(LinkedList*, int);
  * 
  * @return il puntatore al dato contenuto nell'elemento
 */
-void* linkedList_Get(LinkedList*, int);
+void* dLinkedList_Get(DLinkedList*, int);
 
 /**
  * Ottiene il dato contenuto in un elemento di una lista dinamica
@@ -69,6 +66,6 @@ void* linkedList_Get(LinkedList*, int);
  * @param Indice l'indice in cui inserire l'elemento nella lista
  * @param Dato il dato da inserire
 */
-void linkedList_Set(LinkedList*, int, void *);
+void dLinkedList_Set(DLinkedList*, int, void *);
 
 #endif

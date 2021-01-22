@@ -3,17 +3,17 @@
 
 #include "../Utils.h"
 
-#define MAX_LUNGHEZZA 100
+#define MAX_LENGTH 100
 
 typedef int SeqListT;
 
 typedef struct {
-	SeqListT Sequenza[MAX_LUNGHEZZA];
-	int Lunghezza;
-} ListaSequenziale;
+	SeqListT Sequenza[MAX_LENGTH];
+	int length;
+} SequentialList;
 
-void seqList_Initialize(ListaSequenziale*);
-bool seqList_Add(ListaSequenziale*, SeqListT);
+void seqList_Initialize(SequentialList*);
+bool seqList_Add(SequentialList*, SeqListT);
 
 /**
  * Funzione per l'inserimento di un elemento ad un certo indice
@@ -23,7 +23,7 @@ bool seqList_Add(ListaSequenziale*, SeqListT);
  * 
  * @return true se l'inserimento è andato a buon fine, false altrimenti
 */
-bool seqList_InsertAtIndex(ListaSequenziale*, SeqListT, int);
+bool seqList_InsertAtIndex(SequentialList*, SeqListT, int);
 
 /**
  * Funzione per lo spostamento degli elementi in una sequenza a destra
@@ -34,8 +34,8 @@ bool seqList_InsertAtIndex(ListaSequenziale*, SeqListT, int);
  * 
  * @return true se lo spostamento è andato a buon fine, false altrimenti
 */
-bool seqList_ShiftSequence(ListaSequenziale*, int, int);
+bool seqList_ShiftSequence(SequentialList*, int, int);
 
-SeqListT seqList_Get(ListaSequenziale*, int);
+SeqListT seqList_Get(SequentialList*, int);
 
 #endif

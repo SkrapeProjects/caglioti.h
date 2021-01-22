@@ -1,17 +1,20 @@
-#include "LinkedList.h"
+#include "DLinkedList.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 /**
  *  PRIVATE FUNCTIONS
  */
 
-Node* linkedList_FindRecursive(Node *node, int index)
+DLinkedNode* dLinkedList_FindRecursive(DLinkedNode *node, int index)
 {
     if (node->index == index)
         return node;
     else
-        return linkedList_FindRecursive(node->prev, index);
+        return dLinkedList_FindRecursive(node->prev, index);
 }
 
-void linkedList_LoadDataToNode(Node *node, int dataSize, void *data)
+void dLinkedList_LoadDataToNode(DLinkedNode *node, int dataSize, void *data)
 {
     int i;
     for (i = 0; i < dataSize; i ++)
@@ -20,12 +23,12 @@ void linkedList_LoadDataToNode(Node *node, int dataSize, void *data)
 
 /* ---------------------------------------------- */
 
-void linkedList_Add(LinkedList *list, void *data)
+void dLinkedList_Add(DLinkedList *list, void *data)
 {
-    Node *newNode = malloc(sizeof(Node));
+    DLinkedNode *newNode = malloc(sizeof(DLinkedNode));
     newNode->index = list->size ++;
     newNode->dataPointer = malloc(list->dataSize);
-    linkedList_LoadDataToNode(newNode, list->dataSize, data);
+    dLinkedList_LoadDataToNode(newNode, list->dataSize, data);
     newNode->prev = list->lastNode;
     newNode->next = NULL;
     if (list->lastNode != NULL)
@@ -33,15 +36,15 @@ void linkedList_Add(LinkedList *list, void *data)
     list->lastNode = newNode;
 }
 
-void linkedList_Insert(LinkedList *list, int index, void *data)
+void dLinkedList_Insert(DLinkedList *list, int index, void *data)
 {
     if (index > list->size - 1 || index < 0)
         return;
-    Node *newNode = malloc(sizeof(Node));
-    Node *currentNode = linkedList_Find(list, index);
+    DLinkedNode *newNode = malloc(sizeof(DLinkedNode));
+    DLinkedNode *currentNode = dLinkedList_Find(list, index);
     newNode->index = currentNode->index;
     newNode->dataPointer = malloc(list->dataSize);
-    linkedList_LoadDataToNode(newNode, list->dataSize, data);
+    dLinkedList_LoadDataToNode(newNode, list->dataSize, data);
     newNode->prev = currentNode->prev;
     newNode->next = currentNode;
     currentNode->prev->next = newNode;
@@ -55,34 +58,34 @@ void linkedList_Insert(LinkedList *list, int index, void *data)
     }
 }
 
-Node* linkedList_Find(LinkedList *list, int index)
+DLinkedNode* dLinkedList_Find(DLinkedList *list, int index)
 {
     if (index > list->size - 1 || index < 0)
         return NULL;
-    linkedList_FindRecursive(list->lastNode, index);
+    dLinkedList_FindRecursive(list->lastNode, index);
 }
 
-void* linkedList_Get(LinkedList *list, int index)
+void* dLinkedList_Get(DLinkedList *list, int index)
 {
     if (index > list->size - 1 || index < 0)
         return NULL;
-    return linkedList_Find(list, index)->dataPointer;
+    return dLinkedList_Find(list, index)->dataPointer;
 }
 
-void linkedList_Set(LinkedList *list, int index, void *value)
+void dLinkedList_Set(DLinkedList *list, int index, void *value)
 {
     if (index > list->size - 1 || index < 0)
         return;
-    Node *node = linkedList_Find(list, index);
-    linkedList_LoadDataToNode(node, list->dataSize, value);
+    DLinkedNode *node = dLinkedList_Find(list, index);
+    dLinkedList_LoadDataToNode(node, list->dataSize, value);
 }
 
-void linkedList_Remove(LinkedList *list, int index)
+void dLinkedList_Remove(DLinkedList *list, int index)
 {
     if (index > list->size - 1 || index < 0)
         return;
-    Node *node = linkedList_Find(list, index);
-    Node *originalNode = node;
+    DLinkedNode *node = dLinkedList_Find(list, index);
+    DLinkedNode *originalNode = node;
     if (index > 0)
         node->prev->next = node->next;
     if (index == list->size - 1)
@@ -97,12 +100,13 @@ void linkedList_Remove(LinkedList *list, int index)
         }
     }
     list->size --;
+    //free(originalNode->dataPointer);
     free(originalNode);
 }
 
-LinkedList* linkedList_New(int dataTypeSize)
+DLinkedList* dLinkedList_New(int dataTypeSize)
 {
-    LinkedList *linkedList = malloc(sizeof(LinkedList));
+    DLinkedList *linkedList = malloc(sizeof(DLinkedList));
     linkedList->size = 0;
     linkedList->dataSize = dataTypeSize;
     linkedList->lastNode = NULL;
